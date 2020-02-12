@@ -1,11 +1,9 @@
-%x = stem((-5:5), [0 0 0 1 -2 -3 1 2 4 0 0]);
-%h = stem((-5:5), [0 0 1 2 3 0 -2 -3 0 1 0]);
-%x = [-5 -4 -3 -2 -1 0 1 2 3 4 5 ; 0 0 0 1 -2 -3 1 2 4 0 0];
-%h = [-5 -4 -3 -2 -1 0 1 2 3 4 5 ; 0 0 1 2 3 0 -2 -3 0 1 0];
-%stem(x);
 x = [0 0 0 1 -2 -3 1 2 4 0 0];
 h = [0 0 1 2 3 0 -2 -3 0 1 0];
 g = [0 0 0 0 1 0 -1 0 0 0 0];
-convolution = conv(x, h);
+%stem(g);
+%title("g[n]");
+convolution = conv(g, h);
 disp(convolution);
 stem(convolution);
+title("y3[n]");
