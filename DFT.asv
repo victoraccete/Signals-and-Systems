@@ -8,7 +8,7 @@ t = (0:L-1)*T;       % vetor de tempo
 % e a outra de amplitude 1 e frequência de 120 Hz
 S = 0.7*sin(2*pi*50*t) + sin(2*pi*120*t);
 
-% Corrompendo um sinal com um ruído element-wise
+% Corrompendo um sinal com um ruído
 corrupted_S = S + randn(size(t));
 
 figure(1)
@@ -17,17 +17,16 @@ title('Sinal corrompido com ruído')
 xlabel('t (em milissegundos)')
 ylabel('X(t)')
 
-% calculando a transformada de Fourier do sinal corrompido
-transform_corrupted = fft(corrupted_S);
+% calculando a transformada de Fourier do sinal X
+Y = fft(corrupted_S);
 
 % computando o espectro bilateral
-P2 = abs(transform_corrupted/L);
+P2 = abs(Y/L);
 % calculando o espectro unilateral a partir do bilateral
 P1 = P2(1:L/2+1);
 P1(2:end-1) = 2*P1(2:end-1);
 
 f = Fs*(0:(L/2))/L;
-
 figure(2)
 plot(f,P1) 
 title('Amplitude a partir do sinal corrompido')
@@ -36,8 +35,8 @@ ylabel('Amplitude')
 
 % agora, plotando a transformada mas para o sinal incorrompido por ruídos
 figure(3)
-transform_original = fft(S);
-P2 = abs(transform_original/L);
+Y = fft(S);
+P2 = abs(Y/L);
 P1 = P2(1:L/2+1);
 P1(2:end-1) = 2*P1(2:end-1);
 
@@ -45,10 +44,3 @@ plot(f,P1)
 title('Amplitude a partir do sinal original')
 xlabel('f (Hz)')
 ylabel('Amplitude')
-
-% plotando o sinal original incorrompido
-figure(4)
-plot(1000*t(1:50), S(1:50))
-title('Sinal original incorrompido')
-xlabel('t (em milissegundos)')
-ylabel('X(t)')
